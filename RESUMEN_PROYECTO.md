@@ -9,7 +9,7 @@
 **Patrón de Diseño:** CQRS (Command Query Responsibility Segregation)  
 **ORM:** Dapper (micro-ORM)  
 **Base de Datos:** SQL Server (LocalDB en desarrollo)  
-**Estado Actual:** ✅ Funcional - Endpoints de Clientes implementados y probados
+**Estado Actual:** ✅ Funcional - Endpoints de Clientes, Citas y Auditorías implementados y compilando correctamente
 
 ---
 
@@ -72,6 +72,19 @@ Amonet.Application/
 │       ├── ObtenerClientePorIdConsulta.cs      # DTO de consulta
 │       ├── ObtenerClientePorIdManejador.cs     # Handler de la consulta
 │       └── ClienteDto.cs                        # DTO de respuesta
+├── Citas/
+│   ├── Crear/
+│   │   ├── CrearCitaComando.cs                 # DTO de comando
+│   │   ├── CrearCitaComandoValidador.cs        # Validador FluentValidation
+│   │   └── CrearCitaManejador.cs               # Handler del comando
+│   ├── Acciones/
+│   │   ├── ActualizarEstadoCitaComando.cs      # DTO de comando
+│   │   └── ActualizarEstadoCitaManejador.cs    # Handler del comando
+│   └── CitaDto.cs                              # DTO de respuesta
+├── Auditorias/
+│   ├── ObtenerAuditoriasConsulta.cs            # DTO de consulta
+│   ├── ObtenerAuditoriasManejador.cs           # Handler de la consulta
+│   └── AuditoriaDto.cs                         # DTO de respuesta (definido en ObtenerAuditoriasConsulta.cs)
 ├── DependencyInjection.cs
 └── Amonet.Application.csproj
 ```
@@ -112,6 +125,33 @@ public interface IManejadorConsulta<in TConsulta, TResultado>
 - **Resultado:** Retorna `ClienteDto` con todos los datos del cliente
 - **SQL:** SELECT con WHERE Id = @Id
 - **Manejo de Errores:** Lanza `KeyNotFoundException` si no se encuentra
+
+**3. Crear Cita (Comando)**
+- **Comando:** `CrearCitaComando` (ClienteId, ArtistaId, CamillaId, FechaInicio, FechaFin)
+- **Manejador:** `CrearCitaManejador`
+- **Validador:** `CrearCitaComandoValidador` (FluentValidation)
+  - Valida: ClienteId, ArtistaId, CamillaId no vacíos
+  - Valida: FechaInicio < FechaFin
+- **Lógica de Negocio:**
+  - Verifica que Cliente, Artista y Camilla existan
+  - Verifica disponibilidad de camilla (no hay conflictos de horario)
+  - Crea la cita con estado "Creada"
+  - Registra auditoría automáticamente
+- **Resultado:** Retorna `Guid` (ID de la cita creada)
+- **Manejo de Errores:** Lanza `KeyNotFoundException` si entidad no existe, `InvalidOperationException` si camilla no disponible
+
+**4. Actualizar Estado de Cita (Comando)**
+- **Comando:** `ActualizarEstadoCitaComando` (Id, NuevoEstado, AccionAuditoria)
+- **Manejador:** `ActualizarEstadoCitaManejador`
+- **Funcionalidad:** Actualiza el estado de una cita y registra auditoría
+- **Resultado:** Retorna `bool` (true si exitoso)
+- **Manejo de Errores:** Lanza `KeyNotFoundException` si la cita no existe
+
+**5. Obtener Auditorías (Consulta)**
+- **Consulta:** `ObtenerAuditoriasConsulta` (MaximoRegistros, default: 50)
+- **Manejador:** `ObtenerAuditoriasManejador`
+- **Resultado:** Retorna `IEnumerable<AuditoriaDto>` ordenado por fecha descendente
+- **SQL:** SELECT TOP con ORDER BY Fecha DESC
 
 #### Paquetes NuGet:
 - `FluentValidation` (12.1.0) - Validación de comandos
@@ -166,12 +206,14 @@ Amonet.Infrastructure/
 **2. IEjecutorDapper / EjecutorDapper**
 - **Propósito:** Abstracción para ejecutar queries SQL usando Dapper
 - **Métodos disponibles:**
-  - `ConsultarAsync<T>` - Retorna IEnumerable<T>
-  - `ConsultarPrimeroAsync<T>` - Retorna T? (puede ser null)
-  - `EjecutarAsync` - Ejecuta comandos (INSERT, UPDATE, DELETE) retorna int (filas afectadas)
-  - `EjecutarEscalarAsync<T>` - Ejecuta y retorna un valor escalar
+  - `ConsultarAsync<T>(string sql, object? parametros = null, CancellationToken cancellationToken = default)` - Retorna IEnumerable<T>
+  - `ConsultarPrimeroAsync<T>(string sql, object? parametros = null, CancellationToken cancellationToken = default)` - Retorna T? (puede ser null)
+  - `EjecutarAsync(string sql, object? parametros = null, CancellationToken cancellationToken = default)` - Ejecuta comandos (INSERT, UPDATE, DELETE) retorna int (filas afectadas)
+  - `EjecutarEscalarAsync<T>(string sql, object? parametros = null, CancellationToken cancellationToken = default)` - Ejecuta y retorna un valor escalar
 - **Registro:** Scoped (una instancia por request HTTP)
 - **Gestión de Conexiones:** Cada método crea y cierra su propia conexión (using statement)
+- **Soporte CancellationToken:** Todos los métodos soportan CancellationToken para cancelación asíncrona
+- **Implementación:** Usa `CommandDefinition` de Dapper para pasar el CancellationToken
 
 #### Paquetes NuGet:
 - `Dapper` (2.1.66) - Micro-ORM para mapeo objeto-relacional
@@ -254,6 +296,34 @@ app.Run();
      - Response: `Guid` (ID del cliente creado)
   2. `GET /api/clientes/{id}` - Obtener cliente por ID
      - Response: `ClienteDto` (JSON) o 404 si no existe
+
+**CitasController**
+- **Ruta base:** `/api/citas`
+- **Endpoints:**
+  1. `POST /api/citas` - Crear una nueva cita
+     - Body: `CrearCitaComando` (JSON)
+     - Response: `201 Created` con `{ id: Guid }` en body
+     - Validación: FluentValidation manual en el controlador
+  2. `PUT /api/citas/{id}/confirm` - Confirmar una cita
+     - Cambia estado a "Confirmada"
+     - Response: `204 No Content`
+  3. `PUT /api/citas/{id}/cancel` - Cancelar una cita
+     - Cambia estado a "Cancelada"
+     - Response: `204 No Content`
+  4. `PUT /api/citas/{id}/checkin` - Check-in de una cita
+     - Cambia estado a "EnCurso"
+     - Response: `204 No Content`
+  5. `PUT /api/citas/{id}/checkout` - Check-out de una cita
+     - Cambia estado a "Completada"
+     - Response: `204 No Content`
+
+**AuditoriasController**
+- **Ruta base:** `/api/auditorias`
+- **Endpoints:**
+  1. `GET /api/auditorias?maximoRegistros=50` - Obtener lista de auditorías
+     - Query Parameter: `maximoRegistros` (opcional, default: 50)
+     - Response: `IEnumerable<AuditoriaDto>` (JSON)
+     - Orden: Por fecha descendente (más recientes primero)
 
 #### Configuración (appsettings.json):
 
@@ -381,6 +451,8 @@ CREATE TABLE dbo.Auditorias
 
 ### Base URL: `http://localhost:5131`
 
+### CLIENTES
+
 #### 1. POST /api/clientes
 **Descripción:** Crea un nuevo cliente
 
@@ -434,17 +506,147 @@ CREATE TABLE dbo.Auditorias
 
 ---
 
+### CITAS
+
+#### 3. POST /api/citas
+**Descripción:** Crea una nueva cita
+
+**Request Body:**
+```json
+{
+  "clienteId": "00000000-0000-0000-0000-000000000000",
+  "artistaId": "00000000-0000-0000-0000-000000000000",
+  "camillaId": "00000000-0000-0000-0000-000000000000",
+  "fechaInicio": "2025-11-22T10:00:00Z",
+  "fechaFin": "2025-11-22T12:00:00Z"
+}
+```
+
+**Response (201 Created):**
+```json
+{
+  "id": "00000000-0000-0000-0000-000000000000"
+}
+```
+
+**Validaciones:**
+- `clienteId`: Requerido, GUID válido
+- `artistaId`: Requerido, GUID válido
+- `camillaId`: Requerido, GUID válido
+- `fechaInicio`: Requerido, debe ser menor que `fechaFin`
+- `fechaFin`: Requerido
+
+**Lógica de Negocio:**
+- Verifica que Cliente, Artista y Camilla existan
+- Verifica disponibilidad de camilla (no hay conflictos de horario con otras citas en estado "Creada", "Confirmada" o "EnCurso")
+- Crea la cita con estado "Creada"
+- Registra auditoría automáticamente
+
+**Errores posibles:**
+- 400 Bad Request: Validación fallida
+- 404 Not Found: Cliente, Artista o Camilla no existe
+- 409 Conflict: Camilla no disponible en ese horario (InvalidOperationException)
+- 500 Internal Server Error: Error de base de datos
+
+---
+
+#### 4. PUT /api/citas/{id}/confirm
+**Descripción:** Confirma una cita (cambia estado a "Confirmada")
+
+**Path Parameter:**
+- `id`: GUID de la cita
+
+**Response (204 No Content):**
+
+**Errores posibles:**
+- 404 Not Found: Cita no existe
+- 500 Internal Server Error: Error de base de datos
+
+---
+
+#### 5. PUT /api/citas/{id}/cancel
+**Descripción:** Cancela una cita (cambia estado a "Cancelada")
+
+**Path Parameter:**
+- `id`: GUID de la cita
+
+**Response (204 No Content):**
+
+**Errores posibles:**
+- 404 Not Found: Cita no existe
+- 500 Internal Server Error: Error de base de datos
+
+---
+
+#### 6. PUT /api/citas/{id}/checkin
+**Descripción:** Realiza check-in de una cita (cambia estado a "EnCurso")
+
+**Path Parameter:**
+- `id`: GUID de la cita
+
+**Response (204 No Content):**
+
+**Errores posibles:**
+- 404 Not Found: Cita no existe
+- 500 Internal Server Error: Error de base de datos
+
+---
+
+#### 7. PUT /api/citas/{id}/checkout
+**Descripción:** Realiza check-out de una cita (cambia estado a "Completada")
+
+**Path Parameter:**
+- `id`: GUID de la cita
+
+**Response (204 No Content):**
+
+**Errores posibles:**
+- 404 Not Found: Cita no existe
+- 500 Internal Server Error: Error de base de datos
+
+---
+
+### AUDITORÍAS
+
+#### 8. GET /api/auditorias?maximoRegistros=50
+**Descripción:** Obtiene la lista de auditorías más recientes
+
+**Query Parameters:**
+- `maximoRegistros` (opcional): Número máximo de registros a retornar (default: 50)
+
+**Response (200 OK):**
+```json
+[
+  {
+    "id": 1,
+    "accion": "Cita creada",
+    "fecha": "2025-11-22T02:05:33.3675086",
+    "datos": "{\"CitaId\":\"...\",\"ClienteId\":\"...\"}"
+  }
+]
+```
+
+**Orden:** Por fecha descendente (más recientes primero)
+
+**Errores posibles:**
+- 500 Internal Server Error: Error de base de datos
+
+---
+
 ## ✅ ESTADO ACTUAL Y PRUEBAS
 
-### Estado del Proyecto: **FUNCIONAL**
+### Estado del Proyecto: **FUNCIONAL Y COMPILANDO CORRECTAMENTE**
 
 **Pruebas Realizadas:**
-1. ✅ Compilación exitosa de todos los proyectos
+1. ✅ Compilación exitosa de todos los proyectos (sin errores ni advertencias)
 2. ✅ Conexión a base de datos LocalDB funcionando
 3. ✅ Crear cliente: Probado y funcionando
 4. ✅ Obtener cliente por ID: Probado y funcionando
-5. ✅ Validaciones FluentValidation: Implementadas
-6. ✅ Manejo de errores: Implementado (KeyNotFoundException para cliente no encontrado)
+5. ✅ Validaciones FluentValidation: Implementadas y funcionando
+6. ✅ Manejo de errores: Implementado (KeyNotFoundException, InvalidOperationException)
+7. ✅ CancellationToken: Soporte completo en todos los métodos de IEjecutorDapper
+8. ✅ Citas: Funcionalidad completa implementada (crear, confirmar, cancelar, checkin, checkout)
+9. ✅ Auditorías: Consulta de auditorías implementada
 
 **Script de Prueba:**
 - Archivo: `Back/Amonet.Api/test-api.ps1`
@@ -642,13 +844,26 @@ Amonet_API/
 
 ## 📊 RESUMEN EJECUTIVO
 
-**Estado:** ✅ Proyecto funcional y probado  
+**Estado:** ✅ Proyecto funcional, compilando correctamente y probado  
 **Arquitectura:** Clean Architecture con CQRS  
-**Endpoints Funcionales:** 2 (Crear y Obtener Cliente)  
+**Endpoints Funcionales:** 8 endpoints implementados
+  - Clientes: 2 endpoints (Crear, Obtener por ID)
+  - Citas: 5 endpoints (Crear, Confirmar, Cancelar, Check-in, Check-out)
+  - Auditorías: 1 endpoint (Obtener lista)
 **Base de Datos:** SQL Server LocalDB configurada y poblada  
-**Validación:** FluentValidation implementado  
-**ORM:** Dapper funcionando correctamente  
+**Validación:** FluentValidation implementado y funcionando  
+**ORM:** Dapper funcionando correctamente con soporte CancellationToken  
 **Pruebas:** Scripts de prueba ejecutados exitosamente  
+**Funcionalidades de Negocio:** 
+  - Gestión de clientes completa
+  - Gestión de citas completa con validación de disponibilidad
+  - Sistema de auditoría automático
+  - Cambios de estado de citas con registro de auditoría
 
-El proyecto está listo para continuar con el desarrollo de las demás funcionalidades (Artistas, Camillas, Citas) siguiendo el mismo patrón arquitectónico establecido.
+**Funcionalidades Pendientes:**
+- Artistas: CRUD completo
+- Camillas: CRUD completo
+- Consultas adicionales: Listar citas, listar clientes, etc.
+
+El proyecto sigue el patrón arquitectónico establecido y está listo para continuar con las funcionalidades pendientes.
 

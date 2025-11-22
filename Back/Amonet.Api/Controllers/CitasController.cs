@@ -34,7 +34,11 @@ public sealed class CitasController : ControllerBase
         var validacion = await _validadorCrear.ValidateAsync(comando, ct);
         if (!validacion.IsValid)
         {
-            return ValidationProblem(validacion.ToDictionary());
+            foreach (var error in validacion.Errors)
+            {
+                ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+            }
+            return ValidationProblem(ModelState);
         }
 
         var id = await _crearCita.ManejarAsync(comando, ct);

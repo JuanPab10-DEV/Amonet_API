@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\Back\\Amonet.Infrastructure\\Amonet.Infrastructure.csproj": {}
+    "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\back\\Amonet.Infrastructure\\Amonet.Infrastructure.csproj": {}
   },
   "projects": {
     "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\back\\Amonet.Domain\\Amonet.Domain.csproj": {
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\Back\\Amonet.Infrastructure\\Amonet.Infrastructure.csproj": {
+    "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\back\\Amonet.Infrastructure\\Amonet.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\Back\\Amonet.Infrastructure\\Amonet.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\back\\Amonet.Infrastructure\\Amonet.Infrastructure.csproj",
         "projectName": "Amonet.Infrastructure",
-        "projectPath": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\Back\\Amonet.Infrastructure\\Amonet.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\back\\Amonet.Infrastructure\\Amonet.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\pablo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\Back\\Amonet.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\back\\Amonet.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
