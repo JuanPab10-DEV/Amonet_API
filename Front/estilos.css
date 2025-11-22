@@ -34,6 +34,11 @@ h1 {
   font-size: 20px;
 }
 
+.texto-ayuda {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
 form {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -76,12 +81,15 @@ form button:active {
   box-shadow: none;
 }
 
-#resultado-cliente {
+#resultadoCliente,
+#resultadoConsultaCliente,
+#resultadoCrearCita,
+#resultadoAccionCita {
   min-height: 24px;
   font-size: 14px;
 }
 
-#resultado-consulta {
+#resultadoConsultaCliente {
   background: #020617;
   border-radius: 8px;
   border: 1px solid #1f2937;
@@ -91,4 +99,61 @@ form button:active {
   font-size: 13px;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+.botonesAcciones {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.botonesAcciones button {
+  grid-column: span 1;
+  font-size: 13px;
+  padding: 8px 4px;
+}
+
+.fila {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.fila input[type="number"] {
+  width: 90px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #020617;
+  color: #e2e8f0;
+}
+
+.auditorias {
+  max-height: 260px;
+  overflow: auto;
+}
+
+.auditorias table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.auditorias th,
+.auditorias td {
+  border: 1px solid #1f2937;
+  padding: 6px;
+  vertical-align: top;
+}
+
+.auditorias th {
+  background: #0f172a;
+  position: sticky;
+  top: 0;
+}
+
+.auditorias td {
+  background: #020617;
 }

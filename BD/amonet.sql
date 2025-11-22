@@ -78,4 +78,3 @@ VALUES (N'Luna', N'Linework, Realismo'),
 
 INSERT INTO dbo.Camillas (Codigo)
 VALUES (N'CAM-01'), (N'CAM-02'), (N'CAM-03');
-

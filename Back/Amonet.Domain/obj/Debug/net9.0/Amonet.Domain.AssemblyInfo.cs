@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Amonet.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+079df54d44e4507c386dc9625ab346651be26efb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+815f38dd2b9e17444d2519e2e5e9574b058354ef")]
 [assembly: System.Reflection.AssemblyProductAttribute("Amonet.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Amonet.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
