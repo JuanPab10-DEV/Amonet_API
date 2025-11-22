@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Amonet.Application.Abstractions;
 using Amonet.Application.Clientes.Crear;
 using Amonet.Application.Clientes.ObtenerPorId;
+using Amonet.Application.Clientes.Actualizar;
 
 namespace Amonet.Api.Controllers;
 
@@ -10,13 +11,16 @@ namespace Amonet.Api.Controllers;
 public class ClientesController : ControllerBase
 {
     private readonly IManejadorComando<CrearClienteComando, Guid> _crearClienteManejador;
+    private readonly IManejadorComando<ActualizarClienteComando, bool> _actualizarClienteManejador;
     private readonly IManejadorConsulta<ObtenerClientePorIdConsulta, ClienteDto> _obtenerClienteManejador;
 
     public ClientesController(
         IManejadorComando<CrearClienteComando, Guid> crearClienteManejador,
+        IManejadorComando<ActualizarClienteComando, bool> actualizarClienteManejador,
         IManejadorConsulta<ObtenerClientePorIdConsulta, ClienteDto> obtenerClienteManejador)
     {
         _crearClienteManejador = crearClienteManejador;
+        _actualizarClienteManejador = actualizarClienteManejador;
         _obtenerClienteManejador = obtenerClienteManejador;
     }
 
@@ -33,6 +37,14 @@ public class ClientesController : ControllerBase
         var consulta = new ObtenerClientePorIdConsulta(id);
         var cliente = await _obtenerClienteManejador.ManejarAsync(consulta, cancellationToken);
         return Ok(cliente);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> ActualizarCliente(Guid id, [FromBody] ActualizarClienteComando comando, CancellationToken cancellationToken)
+    {
+        var comandoConId = comando with { Id = id };
+        await _actualizarClienteManejador.ManejarAsync(comandoConId, cancellationToken);
+        return NoContent();
     }
 }
 

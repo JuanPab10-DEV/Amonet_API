@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amonet sistema de citas</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <main class="contenedor">
+    <h1>Amonet estudio de tatuajes</h1>
+
+    <!-- Clientes -->
+    <section class="tarjeta">
+      <h2>Registrar cliente</h2>
+      <form id="formCliente">
+        <input type="text" id="cedula" placeholder="Número de cédula" required>
+        <input type="text" id="nombreCompleto" placeholder="Nombre completo" required>
+        <input type="email" id="correo" placeholder="Correo electrónico">
+        <input type="text" id="telefono" placeholder="Teléfono">
+        <button type="submit">Crear cliente</button>
+      </form>
+      <p id="resultadoCliente"></p>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Consultar y editar cliente</h2>
+      <form id="formConsultaCliente">
+        <div class="autocomplete-container autocomplete-grande">
+          <input type="text" id="idCliente" placeholder="Buscar cliente por nombre o cédula..." autocomplete="off" required>
+          <input type="hidden" id="idClienteHidden">
+          <div class="autocomplete-dropdown" id="dropdownConsultaCliente"></div>
+        </div>
+        <button type="button" id="botonConsultarCliente">Consultar</button>
+      </form>
+      
+      <!-- Datos del cliente (solo lectura) -->
+      <div id="datosCliente" class="datos-solo-lectura" style="display: none;">
+        <h3>Datos del cliente</h3>
+        <div class="campo-lectura">
+          <label>Cédula:</label>
+          <span id="clienteCedulaMostrar"></span>
+        </div>
+        <div class="campo-lectura">
+          <label>Nombre completo:</label>
+          <span id="clienteNombreMostrar"></span>
+        </div>
+        <div class="campo-lectura">
+          <label>Correo:</label>
+          <span id="clienteCorreoMostrar"></span>
+        </div>
+        <div class="campo-lectura">
+          <label>Teléfono:</label>
+          <span id="clienteTelefonoMostrar"></span>
+        </div>
+        <button type="button" id="botonEditarCliente" style="margin-top: 12px;">Editar cliente</button>
+      </div>
+
+      <!-- Formulario de edición -->
+      <div id="formEditarCliente" class="formulario-edicion" style="display: none;">
+        <h3>Editar cliente</h3>
+        <form id="formActualizarCliente">
+          <input type="hidden" id="clienteIdEditar">
+          <input type="text" id="clienteCedulaEditar" placeholder="Cédula" required>
+          <input type="text" id="clienteNombreEditar" placeholder="Nombre completo" required>
+          <input type="email" id="clienteCorreoEditar" placeholder="Correo electrónico">
+          <input type="text" id="clienteTelefonoEditar" placeholder="Teléfono">
+          <button type="submit">Guardar cambios</button>
+          <button type="button" id="botonCancelarEdicion">Cancelar</button>
+        </form>
+        <p id="resultadoEditarCliente"></p>
+      </div>
+    </section>
+
+    <!-- Citas -->
+    <section class="tarjeta">
+      <h2>Crear cita</h2>
+      <p class="texto-ayuda">
+        Busca y selecciona el cliente, artista y camilla. Todos deben estar creados previamente.
+      </p>
+      <form id="formCrearCita">
+        <div class="autocomplete-container autocomplete-grande">
+          <input type="text" id="citaClienteId" placeholder="Buscar cliente por nombre o cédula..." autocomplete="off" required>
+          <input type="hidden" id="citaClienteIdHidden">
+          <div class="autocomplete-dropdown" id="dropdownCliente"></div>
+        </div>
+        <div id="datosClienteCita" class="datos-seleccionados" style="display: none;">
+          <div class="campo-lectura">
+            <label>Cédula:</label>
+            <span id="citaClienteCedula"></span>
+          </div>
+          <div class="campo-lectura">
+            <label>Nombre:</label>
+            <span id="citaClienteNombre"></span>
+          </div>
+          <div class="campo-lectura">
+            <label>Correo:</label>
+            <span id="citaClienteCorreo"></span>
+          </div>
+          <div class="campo-lectura">
+            <label>Teléfono:</label>
+            <span id="citaClienteTelefono"></span>
+          </div>
+        </div>
+
+        <div class="autocomplete-container autocomplete-grande">
+          <input type="text" id="citaArtistaId" placeholder="Buscar artista por nombre..." autocomplete="off" required>
+          <input type="hidden" id="citaArtistaIdHidden">
+          <div class="autocomplete-dropdown" id="dropdownArtista"></div>
+        </div>
+        <div id="datosArtistaCita" class="datos-seleccionados" style="display: none;">
+          <div class="campo-lectura">
+            <label>Nombre artístico:</label>
+            <span id="citaArtistaNombre"></span>
+          </div>
+          <div class="campo-lectura">
+            <label>Estilos:</label>
+            <span id="citaArtistaEstilos"></span>
+          </div>
+        </div>
+
+        <div class="autocomplete-container autocomplete-grande">
+          <input type="text" id="citaCamillaId" placeholder="Buscar camilla por código..." autocomplete="off" required>
+          <input type="hidden" id="citaCamillaIdHidden">
+          <div class="autocomplete-dropdown" id="dropdownCamilla"></div>
+        </div>
+        <div id="datosCamillaCita" class="datos-seleccionados" style="display: none;">
+          <div class="campo-lectura">
+            <label>Código:</label>
+            <span id="citaCamillaCodigo"></span>
+          </div>
+        </div>
+
+        <input type="datetime-local" id="citaFechaInicio" required>
+        <input type="datetime-local" id="citaFechaFin" required>
+        <button type="submit">Crear cita</button>
+      </form>
+      <p id="resultadoCrearCita"></p>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Buscar y gestionar citas</h2>
+      <p class="texto-ayuda">
+        Busca una cita por nombre del cliente o artista, luego selecciona una acción.
+      </p>
+      <div class="autocomplete-container autocomplete-grande">
+        <input type="text" id="citaBuscar" placeholder="Buscar cita por nombre de cliente o artista..." autocomplete="off">
+        <input type="hidden" id="citaIdAccion">
+        <div class="autocomplete-dropdown" id="dropdownCita"></div>
+      </div>
+      
+      <div id="datosCitaSeleccionada" class="datos-seleccionados" style="display: none; margin-top: 16px;">
+        <h3>Información de la cita</h3>
+        <div class="campo-lectura">
+          <label>Cliente:</label>
+          <span id="citaInfoCliente"></span>
+        </div>
+        <div class="campo-lectura">
+          <label>Artista:</label>
+          <span id="citaInfoArtista"></span>
+        </div>
+        <div class="campo-lectura">
+          <label>Fecha inicio:</label>
+          <span id="citaInfoFechaInicio"></span>
+        </div>
+        <div class="campo-lectura">
+          <label>Fecha fin:</label>
+          <span id="citaInfoFechaFin"></span>
+        </div>
+        <div class="campo-lectura">
+          <label>Estado:</label>
+          <span id="citaInfoEstado"></span>
+        </div>
+      </div>
+
+      <div class="botonesAcciones" style="margin-top: 16px;">
+        <button type="button" id="botonCancelarCita" data-accion="cancelar">Cancelar cita</button>
+        <button type="button" id="botonIniciarCita" data-accion="iniciar">Iniciar cita</button>
+        <button type="button" id="botonTerminarCita" data-accion="terminar">Terminar cita</button>
+      </div>
+      <p id="resultadoAccionCita"></p>
+    </section>
+
+    <!-- Auditorías -->
+    <section class="tarjeta">
+      <h2>Auditoría de acciones</h2>
+      <div class="fila">
+        <button id="botonCargarAuditorias" type="button">Cargar últimas auditorías</button>
+        <input type="number" id="maximoAuditorias" min="1" max="200" value="50">
+      </div>
+      <div class="auditorias">
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Acción</th>
+              <th>Fecha</th>
+              <th>Datos</th>
+            </tr>
+          </thead>
+          <tbody id="tablaAuditorias">
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Descripción -->
+    <section class="tarjeta">
+      <h2>Descripción del sistema</h2>
+      <p>
+        Este prototipo de Amonet API muestra el flujo principal del estudio de tatuajes:
+        registro de clientes, creación y gestión de citas y auditoría interna de las acciones.
+      </p>
+      <p>
+        El frontend está realizado con HTML, CSS y JavaScript. La API está desarrollada en
+        C sharp con NET nueve, sigue una arquitectura por capas, aplica el patrón CQRS y usa
+        Dapper para acceder a SQL Server.
+      </p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

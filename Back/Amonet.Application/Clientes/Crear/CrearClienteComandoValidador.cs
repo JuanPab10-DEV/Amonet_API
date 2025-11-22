@@ -6,6 +6,10 @@ public class CrearClienteComandoValidador : AbstractValidator<CrearClienteComand
 {
     public CrearClienteComandoValidador()
     {
+        RuleFor(x => x.Cedula)
+            .NotEmpty().WithMessage("La cédula es requerida")
+            .MaximumLength(20).WithMessage("La cédula no puede exceder 20 caracteres");
+
         RuleFor(x => x.NombreCompleto)
             .NotEmpty().WithMessage("El nombre completo es requerido")
             .MaximumLength(150).WithMessage("El nombre completo no puede exceder 150 caracteres");

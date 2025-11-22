@@ -42,26 +42,11 @@ public sealed class CitasController : ControllerBase
         }
 
         var id = await _crearCita.ManejarAsync(comando, ct);
-        return CreatedAtAction(nameof(Confirmar), new { id }, new { id });
+        return CreatedAtAction(nameof(Cancelar), new { id }, new { id });
     }
 
-    // PUT api/citas/{id}/confirm
-    [HttpPut("{id:guid}/confirm")]
-    public async Task<IActionResult> Confirmar(Guid id, CancellationToken ct)
-    {
-        var comando = new ActualizarEstadoCitaComando
-        {
-            Id = id,
-            NuevoEstado = "Confirmada",
-            AccionAuditoria = "Cita confirmada"
-        };
-
-        await _actualizarEstado.ManejarAsync(comando, ct);
-        return NoContent();
-    }
-
-    // PUT api/citas/{id}/cancel
-    [HttpPut("{id:guid}/cancel")]
+    // PUT api/citas/{id}/cancelar
+    [HttpPut("{id:guid}/cancelar")]
     public async Task<IActionResult> Cancelar(Guid id, CancellationToken ct)
     {
         var comando = new ActualizarEstadoCitaComando
@@ -75,30 +60,30 @@ public sealed class CitasController : ControllerBase
         return NoContent();
     }
 
-    // PUT api/citas/{id}/checkin
-    [HttpPut("{id:guid}/checkin")]
-    public async Task<IActionResult> Checkin(Guid id, CancellationToken ct)
+    // PUT api/citas/{id}/iniciar
+    [HttpPut("{id:guid}/iniciar")]
+    public async Task<IActionResult> Iniciar(Guid id, CancellationToken ct)
     {
         var comando = new ActualizarEstadoCitaComando
         {
             Id = id,
             NuevoEstado = "EnCurso",
-            AccionAuditoria = "Cita checkin"
+            AccionAuditoria = "Cita iniciada"
         };
 
         await _actualizarEstado.ManejarAsync(comando, ct);
         return NoContent();
     }
 
-    // PUT api/citas/{id}/checkout
-    [HttpPut("{id:guid}/checkout")]
-    public async Task<IActionResult> Checkout(Guid id, CancellationToken ct)
+    // PUT api/citas/{id}/terminar
+    [HttpPut("{id:guid}/terminar")]
+    public async Task<IActionResult> Terminar(Guid id, CancellationToken ct)
     {
         var comando = new ActualizarEstadoCitaComando
         {
             Id = id,
             NuevoEstado = "Completada",
-            AccionAuditoria = "Cita checkout"
+            AccionAuditoria = "Cita terminada"
         };
 
         await _actualizarEstado.ManejarAsync(comando, ct);

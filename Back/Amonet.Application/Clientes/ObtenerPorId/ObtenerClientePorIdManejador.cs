@@ -17,6 +17,7 @@ public class ObtenerClientePorIdManejador : IManejadorConsulta<ObtenerClientePor
         const string sql = @"
             SELECT 
                 Id,
+                Cedula,
                 NombreCompleto,
                 Correo,
                 Telefono,

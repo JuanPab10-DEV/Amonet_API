@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Zfjfuqcn8vk=",
+  "dgSpecHash": "pZpb8PxvBWE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\back\\Amonet.Api\\Amonet.Api.csproj",
+  "projectFilePath": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\BACK\\Amonet.Api\\Amonet.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pablo\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\pablo\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",

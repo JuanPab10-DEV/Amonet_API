@@ -157,3 +157,150 @@ form button:active {
 .auditorias td {
   background: #020617;
 }
+
+/* Autocompletado */
+.autocomplete-container {
+  position: relative;
+  grid-column: span 2;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #0f172a;
+  border: 1px solid #1f2937;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+
+.autocomplete-dropdown.show {
+  display: block;
+}
+
+.autocomplete-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #1f2937;
+  transition: background 0.15s ease;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.selected {
+  background: #1e293b;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item strong {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.autocomplete-item .subtitulo {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* Autocompletado grande */
+.autocomplete-grande input {
+  font-size: 16px;
+  padding: 14px 16px;
+  min-height: 48px;
+}
+
+.autocomplete-grande .autocomplete-dropdown {
+  max-height: 300px;
+  font-size: 15px;
+}
+
+.autocomplete-grande .autocomplete-item {
+  padding: 14px 16px;
+  font-size: 15px;
+}
+
+/* Datos de solo lectura */
+.datos-solo-lectura,
+.datos-seleccionados {
+  margin-top: 16px;
+  padding: 16px;
+  background: #0f172a;
+  border: 1px solid #1f2937;
+  border-radius: 8px;
+}
+
+.datos-solo-lectura h3,
+.datos-seleccionados h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #22c55e;
+}
+
+.campo-lectura {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #1f2937;
+}
+
+.campo-lectura:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.campo-lectura label {
+  font-weight: 600;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.campo-lectura span {
+  color: #e2e8f0;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+/* Formulario de edición */
+.formulario-edicion {
+  margin-top: 16px;
+  padding: 16px;
+  background: #0f172a;
+  border: 1px solid #1f2937;
+  border-radius: 8px;
+}
+
+.formulario-edicion h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #22c55e;
+}
+
+.formulario-edicion form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.formulario-edicion form button[type="submit"] {
+  grid-column: span 1;
+  background: #22c55e;
+}
+
+.formulario-edicion form button[type="button"] {
+  grid-column: span 1;
+  background: #64748b;
+  color: #e2e8f0;
+}
