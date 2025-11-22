@@ -16,15 +16,15 @@
 | **CSS3+** | ✅ **CUMPLE** | `Front/estilos.css` - Estilos modernos con CSS3+ (grid, flexbox, variables, etc.) |
 | **JS (ES6+)** | ✅ **CUMPLE** | `Front/app.js` - Código JavaScript moderno con ES6+ (arrow functions, async/await, destructuring, template literals) |
 
-### ⚠️ Tecnologías Opcionales (Valoración Adicional)
+### ✅ Tecnologías Opcionales (Valoración Adicional)
 
 | Tecnología | Estado | Observación |
 |-----------|--------|-------------|
-| **Bootstrap o similares** | ❌ No implementado | Se podría agregar para obtener puntos adicionales |
-| **Ojs miniframework** | ❌ No implementado | No aplica |
-| **Framework de front (Angular, React, Vue)** | ❌ No implementado | Se podría agregar para obtener puntos adicionales |
+| **Bootstrap o similares** | ✅ **IMPLEMENTADO** | Bootstrap 5.3.8 instalado y configurado en `Front/nextjs/`<br>- CSS importado en `_app.tsx`<br>- JS cargado dinámicamente<br>- Uso en modales y formularios |
+| **Framework de front (Angular, React, Vue)** | ✅ **IMPLEMENTADO** | **Next.js 15.4.5** (Framework React)<br>- React 19.1.1<br>- TypeScript 5.9.2<br>- Arquitectura de componentes<br>- SSR habilitado |
+| **Ojs miniframework** | ⚠️ **PENDIENTE** | No encontrado en el código<br>Requiere investigación o consulta con el profesor |
 
-**Recomendación:** El proyecto cumple con las tecnologías obligatorias. Para obtener puntos adicionales, se podría considerar agregar Bootstrap o un framework como React/Vue.
+**Estado:** ✅ **2 de 3 tecnologías opcionales implementadas** (Bootstrap + Framework React)
 
 ---
 
@@ -81,16 +81,23 @@
 ```
 /
 ├── Front/          ✅ Presente
-│   ├── index.html  ✅
-│   ├── estilos.css ✅
-│   └── app.js      ✅
+│   ├── nextjs/     ✅ (Framework React - Next.js)
+│   │   ├── src/
+│   │   ├── package.json (Bootstrap 5.3.8)
+│   │   └── ...
+│   └── legacy/     ✅ (HTML/CSS/JS puro - backup)
+│       ├── index.html
+│       ├── estilos.css
+│       └── app.js
 ├── Back/           ✅ Presente
 │   ├── Amonet.Api/ ✅
 │   ├── Amonet.Application/ ✅
 │   ├── Amonet.Infrastructure/ ✅
 │   └── Amonet.Domain/ ✅
 └── BD/             ✅ Presente
-    └── amonet.sql  ✅
+    ├── amonet.sql  ✅
+    ├── migracion_cedula.sql
+    └── actualizar_cedulas_null.sql
 ```
 
 **Estado:** ✅ **ESTRUCTURA CORRECTA**
@@ -154,15 +161,16 @@
 - ✅ Arquitectura por capas
 - ✅ Estructura de entrega correcta
 
-### ⚠️ Opcionales (Puntos Adicionales): **NO IMPLEMENTADOS**
+### ✅ Opcionales (Puntos Adicionales): **IMPLEMENTADOS**
 
-- ❌ Bootstrap o framework CSS
-- ❌ Framework de frontend (React/Vue/Angular)
+- ✅ **Bootstrap 5.3.8** - Framework CSS instalado y configurado
+- ✅ **Next.js (React)** - Framework de frontend completo
+- ⚠️ **OJS Miniframework** - Pendiente de investigación
 
 ### 🎯 Puntuación Estimada
 
 **Requisitos Obligatorios:** 100% ✅  
-**Opcionales:** 0% (pero no son obligatorios)  
+**Opcionales:** 66% ✅ (Bootstrap + Framework React implementados)  
 **Criterios de Evaluación:** Todos cumplidos ✅
 
 ---
