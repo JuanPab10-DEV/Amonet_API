@@ -1,0 +1,12 @@
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\bin\Debug\net9.0\Amonet.Domain.deps.json
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\bin\Debug\net9.0\Amonet.Domain.dll
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\bin\Debug\net9.0\Amonet.Domain.pdb
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\obj\Debug\net9.0\Amonet.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\obj\Debug\net9.0\Amonet.Domain.AssemblyInfoInputs.cache
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\obj\Debug\net9.0\Amonet.Domain.AssemblyInfo.cs
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\obj\Debug\net9.0\Amonet.Domain.csproj.CoreCompileInputs.cache
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\obj\Debug\net9.0\Amonet.Domain.sourcelink.json
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\obj\Debug\net9.0\Amonet.Domain.dll
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\obj\Debug\net9.0\refint\Amonet.Domain.dll
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\obj\Debug\net9.0\Amonet.Domain.pdb
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Domain\obj\Debug\net9.0\ref\Amonet.Domain.dll

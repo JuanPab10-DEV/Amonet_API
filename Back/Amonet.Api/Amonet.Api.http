@@ -1,0 +1,17 @@
+@Amonet.Api_HostAddress = http://localhost:5131
+
+### Crear un nuevo cliente
+POST {{Amonet.Api_HostAddress}}/api/clientes
+Content-Type: application/json
+
+{
+  "nombreCompleto": "Juan Pérez",
+  "correo": "juan.perez@example.com",
+  "telefono": "+34 600 123 456"
+}
+
+### Obtener cliente por ID (reemplaza {id} con un GUID válido)
+GET {{Amonet.Api_HostAddress}}/api/clientes/00000000-0000-0000-0000-000000000000
+Accept: application/json
+
+###

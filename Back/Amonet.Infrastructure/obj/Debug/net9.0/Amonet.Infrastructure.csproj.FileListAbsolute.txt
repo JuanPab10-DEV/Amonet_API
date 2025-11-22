@@ -1,0 +1,16 @@
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\bin\Debug\net9.0\Amonet.Infrastructure.deps.json
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\bin\Debug\net9.0\Amonet.Infrastructure.dll
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\bin\Debug\net9.0\Amonet.Infrastructure.pdb
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\bin\Debug\net9.0\Amonet.Domain.dll
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\bin\Debug\net9.0\Amonet.Domain.pdb
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\obj\Debug\net9.0\Amonet.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\obj\Debug\net9.0\Amonet.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\obj\Debug\net9.0\Amonet.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\obj\Debug\net9.0\Amonet.Infrastructure.AssemblyInfo.cs
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\obj\Debug\net9.0\Amonet.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\obj\Debug\net9.0\Amonet.Infrastructure.sourcelink.json
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\obj\Debug\net9.0\Amonet.I.5B100E31.Up2Date
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\obj\Debug\net9.0\Amonet.Infrastructure.dll
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\obj\Debug\net9.0\refint\Amonet.Infrastructure.dll
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\obj\Debug\net9.0\Amonet.Infrastructure.pdb
+C:\Users\pablo\OneDrive\Documents\GitHub\Amonet_API\back\Amonet.Infrastructure\obj\Debug\net9.0\ref\Amonet.Infrastructure.dll
