@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amonet sistema de citas</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <main class="contenedor">
+    <h1>Amonet estudio de tatuajes</h1>
+
+    <section class="tarjeta">
+      <h2>Registrar cliente</h2>
+      <form id="form-cliente">
+        <input type="text" id="nombreCompleto" placeholder="Nombre completo" required>
+        <input type="email" id="correo" placeholder="Correo electrónico">
+        <input type="text" id="telefono" placeholder="Teléfono">
+        <button type="submit">Crear cliente</button>
+      </form>
+      <p id="resultado-cliente"></p>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Consultar cliente</h2>
+      <form id="form-consulta">
+        <input type="text" id="idCliente" placeholder="Id del cliente" required>
+        <button type="submit">Consultar</button>
+      </form>
+      <pre id="resultado-consulta"></pre>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Visión general del sistema</h2>
+      <p>
+        Este prototipo muestra el flujo mínimo del sistema Amonet
+        el registro de clientes y la consulta posterior,
+        usando la API REST con CQRS y Dapper sobre SQL Server.
+      </p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
