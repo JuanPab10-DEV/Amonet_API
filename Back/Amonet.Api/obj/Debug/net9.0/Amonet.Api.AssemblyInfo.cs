@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Amonet.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66cfad02d426b9414b19094eb840500485e6758a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5aeecf5940dd2d405015c28399ea1488c53aee04")]
 [assembly: System.Reflection.AssemblyProductAttribute("Amonet.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Amonet.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
