@@ -3,6 +3,7 @@ using Amonet.Application.Abstractions;
 using Amonet.Application.Clientes.Crear;
 using Amonet.Application.Clientes.ObtenerPorId;
 using Amonet.Application.Clientes.Actualizar;
+using Amonet.Application.Clientes.Eliminar;
 
 namespace Amonet.Api.Controllers;
 
@@ -13,15 +14,18 @@ public class ClientesController : ControllerBase
     private readonly IManejadorComando<CrearClienteComando, Guid> _crearClienteManejador;
     private readonly IManejadorComando<ActualizarClienteComando, bool> _actualizarClienteManejador;
     private readonly IManejadorConsulta<ObtenerClientePorIdConsulta, ClienteDto> _obtenerClienteManejador;
+    private readonly IManejadorComando<EliminarClienteComando, bool> _eliminarClienteManejador;
 
     public ClientesController(
         IManejadorComando<CrearClienteComando, Guid> crearClienteManejador,
         IManejadorComando<ActualizarClienteComando, bool> actualizarClienteManejador,
-        IManejadorConsulta<ObtenerClientePorIdConsulta, ClienteDto> obtenerClienteManejador)
+        IManejadorConsulta<ObtenerClientePorIdConsulta, ClienteDto> obtenerClienteManejador,
+        IManejadorComando<EliminarClienteComando, bool> eliminarClienteManejador)
     {
         _crearClienteManejador = crearClienteManejador;
         _actualizarClienteManejador = actualizarClienteManejador;
         _obtenerClienteManejador = obtenerClienteManejador;
+        _eliminarClienteManejador = eliminarClienteManejador;
     }
 
     [HttpPost]
@@ -44,6 +48,14 @@ public class ClientesController : ControllerBase
     {
         var comandoConId = comando with { Id = id };
         await _actualizarClienteManejador.ManejarAsync(comandoConId, cancellationToken);
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> EliminarCliente(Guid id, CancellationToken cancellationToken)
+    {
+        var comando = new EliminarClienteComando(id);
+        await _eliminarClienteManejador.ManejarAsync(comando, cancellationToken);
         return NoContent();
     }
 }

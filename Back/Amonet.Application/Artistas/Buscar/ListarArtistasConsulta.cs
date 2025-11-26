@@ -12,3 +12,4 @@ public record ArtistaBusquedaDto(
     bool Activo
 );
 
+

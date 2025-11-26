@@ -58,3 +58,4 @@ El frontend se conecta a la API REST en:
 - El frontend legacy se mantiene como referencia/backup
 - Ambos frontends consumen la misma API REST
 
+

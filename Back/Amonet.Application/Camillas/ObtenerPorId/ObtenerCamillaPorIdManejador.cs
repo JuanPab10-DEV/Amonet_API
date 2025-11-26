@@ -30,3 +30,4 @@ public class ObtenerCamillaPorIdManejador : IManejadorConsulta<ObtenerCamillaPor
     }
 }
 
+

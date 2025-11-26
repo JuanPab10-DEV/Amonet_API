@@ -17,3 +17,4 @@ public record CitaBusquedaDto(
     string Estado
 );
 
+

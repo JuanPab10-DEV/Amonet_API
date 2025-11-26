@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\BACK\\Amonet.Domain\\Amonet.Domain.csproj": {}
+    "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\Back\\Amonet.Domain\\Amonet.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\BACK\\Amonet.Domain\\Amonet.Domain.csproj": {
+    "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\Back\\Amonet.Domain\\Amonet.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\BACK\\Amonet.Domain\\Amonet.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\Back\\Amonet.Domain\\Amonet.Domain.csproj",
         "projectName": "Amonet.Domain",
-        "projectPath": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\BACK\\Amonet.Domain\\Amonet.Domain.csproj",
+        "projectPath": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\Back\\Amonet.Domain\\Amonet.Domain.csproj",
         "packagesPath": "C:\\Users\\pablo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\BACK\\Amonet.Domain\\obj\\",
+        "outputPath": "C:\\Users\\pablo\\OneDrive\\Documents\\GitHub\\Amonet_API\\Back\\Amonet.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -5,6 +5,7 @@ using Amonet.Application.Clientes.Crear;
 using Amonet.Application.Clientes.ObtenerPorId;
 using Amonet.Application.Clientes.Buscar;
 using Amonet.Application.Clientes.Actualizar;
+using Amonet.Application.Clientes.Eliminar;
 using Amonet.Application.Artistas.Buscar;
 using Amonet.Application.Artistas.ObtenerPorId;
 using Amonet.Application.Camillas.Buscar;
@@ -25,6 +26,7 @@ public static class DependencyInjection
         // Clientes
         services.AddScoped<IManejadorComando<CrearClienteComando, Guid>, CrearClienteManejador>();
         services.AddScoped<IManejadorComando<ActualizarClienteComando, bool>, ActualizarClienteManejador>();
+        services.AddScoped<IManejadorComando<EliminarClienteComando, bool>, EliminarClienteManejador>();
         services.AddScoped<IManejadorConsulta<ObtenerClientePorIdConsulta, ClienteDto>, ObtenerClientePorIdManejador>();
         services.AddScoped<IManejadorConsulta<ListarClientesConsulta, IEnumerable<ClienteBusquedaDto>>, ListarClientesManejador>();
         

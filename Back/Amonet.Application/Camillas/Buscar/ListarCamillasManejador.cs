@@ -52,3 +52,4 @@ public class ListarCamillasManejador : IManejadorConsulta<ListarCamillasConsulta
     }
 }
 
+

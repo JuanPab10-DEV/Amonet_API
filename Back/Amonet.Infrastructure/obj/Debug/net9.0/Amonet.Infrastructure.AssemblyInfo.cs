@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Amonet.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6cc54cabc4f1023a7c4149b675fd6c849165f95a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f1a1a774cf5459ab29f4a5ce33c8f5d54bc597be")]
 [assembly: System.Reflection.AssemblyProductAttribute("Amonet.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Amonet.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
