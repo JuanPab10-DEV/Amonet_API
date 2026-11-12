@@ -7,10 +7,8 @@ Sistema completo de gestión de citas para un estudio de tatuajes, desarrollado 
 ## 🏗️ Arquitectura
 
 ### Frontend
-- **Next.js 15.4.5** (Framework React)
-- **TypeScript 5.9.2**
-- **Bootstrap 5.3.8**
-- **Tailwind CSS 3.4.17**
+- **HTML5, CSS3 y JavaScript (ES6+)**, sin frameworks
+- Consume la API REST con `fetch`
 
 ### Backend
 - **.NET 9.0**
@@ -29,8 +27,7 @@ Sistema completo de gestión de citas para un estudio de tatuajes, desarrollado 
 ```
 /
 ├── Front/              # Frontend
-│   ├── nextjs/        # Proyecto Next.js (Framework React)
-│   └── legacy/        # Frontend HTML/CSS/JS puro (backup)
+│   └── web/           # Interfaz en HTML, CSS y JavaScript
 │
 ├── Back/               # Backend
 │   ├── Amonet.Api/            # Capa de presentación (API REST)
@@ -49,8 +46,8 @@ Sistema completo de gestión de citas para un estudio de tatuajes, desarrollado 
 
 ### Requisitos Previos
 - .NET 9 SDK
-- Node.js 18+
 - SQL Server LocalDB
+- Node.js 18+ (solo para servir el frontend en local)
 
 ### Paso 1: Base de Datos
 ```powershell
@@ -73,12 +70,13 @@ El API estará disponible en: `http://localhost:5131`
 
 ### Paso 3: Frontend
 ```powershell
-cd Front\nextjs
-npm install
-npm run dev
+npx http-server Front/web -p 5173
 ```
 
-El frontend estará disponible en: `http://localhost:3000`
+El frontend estará disponible en: `http://localhost:5173`
+
+> Sírvelo desde ese puerto en lugar de abrir `index.html` con doble clic: la API solo acepta
+> peticiones de los orígenes configurados en `appsettings.json` (`localhost:3000` y `localhost:5173`).
 
 
 ## 🎯 Funcionalidades
@@ -141,29 +139,7 @@ El frontend estará disponible en: `http://localhost:3000`
 ### Auditoría
 - `GET /api/auditorias` - Obtener auditorías
 
-## ✅ Cumplimiento de Requisitos
-
-### Requisitos Obligatorios
-- ✅ HTML5, CSS3+, JavaScript ES6+
-- ✅ .NET 9, Arquitectura por Capas, CQRS, Dapper
-- ✅ API REST con JSON
-- ✅ Script DDL de base de datos
-- ✅ Estructura Front/Back/BD
-
-### Tecnologías Opcionales (Puntos Adicionales)
-- ✅ Bootstrap 5.3.8
-- ✅ Next.js (Framework React)
-- ⚠️ OJS Miniframework (pendiente)
-
 ## 👨‍💻 Autor
 
-Proyecto desarrollado para el curso de Desarrollo de Software.
-
-## 📄 Licencia
-
-Este proyecto es de uso académico.
-
----
-
-**Versión:** 1.0.0  
-**Última actualización:** 2024
+Desarrollado por **Juan Pablo Saldarriaga** como proyecto académico, a partir del caso de
+[Amonet Tattoo Studio](https://github.com/JuanPab10-DEV/Amonet), un estudio de tatuajes de Medellín.
